@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+const sharp = require('sharp');
+
 var app = express();
 
 // view engine setup
@@ -30,6 +32,9 @@ app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
+  sharp(inputBuffer)
+  .resize(320, 240)
+   .toFile('output.webp', (err, info) => { console.log("notgoingtowork") });
 });
 
 // error handlers
